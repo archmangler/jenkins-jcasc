@@ -6,5 +6,5 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 COPY casc.yaml /var/jenkins_home/casc.yaml
 COPY covenant.groovy /usr/local/covenant.groovy
 USER root
-RUN apt-get update && apt-get -y install kubernetes-client
+RUN apt-get update && apt-get -y install kubernetes-client netcat jq
 USER jenkins

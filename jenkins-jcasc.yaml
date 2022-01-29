@@ -17,10 +17,12 @@ spec:
       serviceAccountName: internal-kubectl
       containers:
       - name: jenkins
-        image: archbungle/jenkins:jcasc-0.0.2
+        image: archbungle/jenkins:jcasc-0.0.17
         imagePullPolicy: IfNotPresent
         env:
-        - name: ADMIN_PASSWORD
+        - name: COVENANT_ADMIN
+          value: "AdminUser"
+        - name: COVENANT_PASSWORD
           value: "somethingrandom"
         ports:
           - name: tcp-8080
@@ -68,6 +70,11 @@ rules:
     resources:
       - deployments
       - pods
+      - services
+      - rolebindings
+      - roles
+      - pvc
+      - pv
     verbs:
       - get
       - watch
@@ -75,6 +82,7 @@ rules:
       - patch
       - delete
       - restart
+      - create
 ---
 apiVersion: v1
 kind: ServiceAccount
