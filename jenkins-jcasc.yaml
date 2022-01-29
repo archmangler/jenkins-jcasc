@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: covenant
+spec:
+  selector:
+    matchLabels:
+      app: jenkins
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: internal-kubectl
+      containers:
+      - name: jenkins
+        image: archbungle/jenkins:jcasc-0.0.2
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ADMIN_PASSWORD
+          value: "somethingrandom"
+        ports:
+          - name: tcp-8080
+            containerPort: 8080
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: jenkins-service
+  namespace: covenant
+spec:
+  type: NodePort
+  selector:
+    app: jenkins
+  ports:
+    - name: tcp-80
+      port: 8080
+      nodePort: 30888
+      protocol: TCP
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: modify-pods-to-sa
+  namespace: covenant
+subjects:
+  - kind: ServiceAccount
+    name: internal-kubectl
+roleRef:
+  kind: Role
+  name: modify-pods
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: modify-pods
+  namespace: covenant
+rules:
+  - apiGroups: ["apps","extensions",""]
+    resources:
+      - deployments
+      - pods
+    verbs:
+      - get
+      - watch
+      - list
+      - patch
+      - delete
+      - restart
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: internal-kubectl
+  namespace: covenant

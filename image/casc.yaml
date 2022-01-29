@@ -1,0 +1,20 @@
+unclassified:
+  location:
+    url: http://0.0.0.0:8888/
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        # create a user called admin
+        - id: "admin"
+          password: "admin"
+  authorizationStrategy: loggedInUsersCanDoAnything
+
+#Ensure at least 1 executor available
+#pipelines:
+#  numExecutors: 1
+
+#Job Definitions using job-dsl plugin
+jobs:
+  - file: /usr/local/covenant.groovy
