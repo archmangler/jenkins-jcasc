@@ -17,13 +17,13 @@ spec:
       serviceAccountName: internal-kubectl
       containers:
       - name: jenkins
-        image: archbungle/jenkins:jcasc-0.0.17
+        image: archbungle/jenkins:jcasc-0.0.33
         imagePullPolicy: IfNotPresent
         env:
-        - name: COVENANT_ADMIN
-          value: "AdminUser"
+        - name: COVENANT_USER
+          value: "gomonkey"
         - name: COVENANT_PASSWORD
-          value: "somethingrandom"
+          value: "h4n00m4n"
         ports:
           - name: tcp-8080
             containerPort: 8080

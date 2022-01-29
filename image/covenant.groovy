@@ -38,7 +38,13 @@ pipeline {
                nc -zv covenant-service 7443
                COVENANT_IP=\$(kubectl get service covenant-service -n covenant -o json | jq -r '.spec.clusterIP')
                COVENANT_TOKEN=\$(curl -vk -X POST --header 'Content-Type: application/json-patch+json' --header 'Accept: application/json' -d '{ "username":"AdminUser", "password":"Cr4ckM0nk3y!!"}' https://\$COVENANT_IP:7443/api/users/login | jq -r '.covenantToken')
-               echo \$COVENANT_TOKEN
+               echo "Got covenant auth token: \$COVENANT_TOKEN"
+               echo "Getting current user list ..."
+               curl -sk -X GET --header 'Accept: application/json' --header "Authorization: Bearer \$COVENANT_TOKEN" https://\$COVENANT_IP:7443/api/users
+               echo "creating first non-Admin user ..."
+               curl -vk -X POST --header 'Content-Type: application/json-patch+json' --header 'Accept: application/json' --header "Authorization: Bearer \$COVENANT_TOKEN" -d '{"username":"someuser","password":"H4N00m4n##","ConfirmPassword":"H4N00m4n##"}' https://\$COVENANT_IP:7443/api/users
+               echo "Getting updated user list ..."
+               curl -sk -X GET --header 'Accept: application/json' --header "Authorization: Bearer \$COVENANT_TOKEN" https://\$COVENANT_IP:7443/api/users
                '''
             }
         }
