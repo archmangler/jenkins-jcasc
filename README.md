@@ -1,6 +1,6 @@
 # Kubernetes Deployment pipeline for Covenant
 
-* The code in this repo demonstrates an automated pipeline to deploy Covenant () to kubernetes and configure it using the covenant API.
+* The code in this repo demonstrates an automated pipeline to deploy Covenant (github.com/cobbr/Covenant) to kubernetes and configure it using the covenant API.
 * A jenkins pipeline image is first deployed to kubernetes, it then deploys covenant from a pre-configured image (hosted at dockerhub)
 * The pipeline then interacts with the covenant API to create a default user.
 
@@ -48,9 +48,10 @@ The user configured via the API should be visible in the `users` section:
 
 ![alt text](content/covenant-users.png?raw=true "Covenant user")
 
-# Building a new deployer image
+# Extending the covenant deployer pipeline
 
-* To update the pipeline in the docker image, modify `covenant.groovy` in `deployer-image` folder and rebuild the image.
+* The deployer pipeline is defined as a declarative Jenkins pipeline DSL based on groovy and deployed as an immutable docker image.
+* To modify and update the pipeline in the docker image, modify `covenant.groovy` in `deployer-image` folder and rebuild the image:
 
 ```
 #Note: Use your  specific registry tag below ...
@@ -61,7 +62,7 @@ docker push archbungle/jenkins:jcasc-0.0.x
 
 (Modify to your personal image registry requirements)
 
-* NOTE: The current bootstrapped Covenant image is available at Dockerhub: `archbungle/kovenant:0.0.1`
+* NOTE: The current bootstrapped Covenant image is available at Dockerhub: `archbungle/kovenant:0.0.1` - this image is bootstrapped with a known admin password which can be updated during redeploy time.
 
 # Repositories:
 
