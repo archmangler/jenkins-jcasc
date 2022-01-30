@@ -50,20 +50,24 @@ The user configured via the API should be visible in the `users` section:
 
 # Building a new deployer image
 
-The jenkins deployer image can be rebuilt using the sources in `image/`:
-
-* To build an updated image:
+* To update the pipeline in the docker image, modify `covenant.groovy` in `deployer-image` folder and rebuild the image.
 
 ```
-cd image/
+#Note: Use your  specific registry tag below ...
+cd deployer-image/
 docker build -t archbungle/jenkins:jcasc-0.0.x
 docker push archbungle/jenkins:jcasc-0.0.x
 ```
 
 (Modify to your personal image registry requirements)
 
-* NOTE: The bootstrapped Covenant image is available at Dockerhub: `archbungle/kovenant:0.0.1`
+* NOTE: The current bootstrapped Covenant image is available at Dockerhub: `archbungle/kovenant:0.0.1`
 
+# Repositories:
+
+* Deployer: https://github.com/archmangler/jenkins-jcasc
+* Covenant kubernetes configs: https://github.com/archmangler/kovenant
+ 
 #  Issues
 
 * The covenant API is poorly documented, and swagger is broken: https://github.com/cobbr/Covenant/issues/352
