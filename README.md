@@ -6,7 +6,7 @@
 
 # How to deploy (MacOS):
 
-* Install Rancher desktop on your computer: (https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.0.0/Rancher.Desktop-1.0.0.x86_64.dmg)
+* Install Rancher desktop on your computer to get a convenient Kubernetes environment for development: (https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.0.0/Rancher.Desktop-1.0.0.x86_64.dmg)
 * Clone down the repo: git clone https://github.com/archmangler/jenkins-jcasc
 * Run the demo deployer:
 
