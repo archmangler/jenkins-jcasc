@@ -1,6 +1,6 @@
-# Kubernetes Deployment pipeline for Eqonex Matching Engine Load Test Workbench
+# Kubernetes Deployment pipeline for `Eqonex Matching Engine Load Test Workbench`
 
-* The code in this repo demonstrates an automated pipeline to deploy Eqonex Matching Engine Load Test Workbench to kubernetes and configure it using the eqonex-loadengine API.
+* The code in this repo demonstrates an automated pipeline to deploy `Eqonex Matching Engine Load Test Workbench` to kubernetes and configure it using the eqonex-loadengine API.
 * A jenkins pipeline image is first deployed to kubernetes, it then deploys eqonex-loadengine from a pre-configured image (hosted at dockerhub)
 * The pipeline then interacts with the eqonex-loadengine API to create a default user.
 
@@ -38,15 +38,15 @@ jenkins-service   NodePort   10.43.49.147   <none>        8080:30888/TCP   2m15s
 
 * Get eqonex-loadengine login password from the Jenkins console output:
 
-![alt text](content/password.png?raw=true "Eqonex Matching Engine Load Test Workbench Password")
+![alt text](content/password.png?raw=true "`Eqonex Matching Engine Load Test Workbench` Password")
 
-* Access the Eqonex Matching Engine Load Test Workbench UI at `https://127.0.0.1:30743/eqonex-loadengineuser/login` using the credential provided in the pipeline console output (This should be ready in the "Configuring" Jenkins build stage):
+* Access the `Eqonex Matching Engine Load Test Workbench` UI at `https://127.0.0.1:30743/eqonex-loadengineuser/login` using the credential provided in the pipeline console output (This should be ready in the "Configuring" Jenkins build stage):
 
-![alt text](content/eqonex-loadengine.png?raw=true "Eqonex Matching Engine Load Test Workbench UI")
+![alt text](content/eqonex-loadengine.png?raw=true "`Eqonex Matching Engine Load Test Workbench` UI")
 
 The user configured via the API should be visible in the `users` section:
 
-![alt text](content/eqonex-loadengine-users.png?raw=true "Eqonex Matching Engine Load Test Workbench user")
+![alt text](content/eqonex-loadengine-users.png?raw=true "`Eqonex Matching Engine Load Test Workbench` user")
 
 # Extending the eqonex-loadengine deployer pipeline
 
