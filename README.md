@@ -1,8 +1,8 @@
-# Kubernetes Deployment pipeline for Covenant
+# Kubernetes Deployment pipeline for Eqonex Matching Engine Load Test Workbench
 
-* The code in this repo demonstrates an automated pipeline to deploy Covenant (github.com/cobbr/Covenant) to kubernetes and configure it using the covenant API.
-* A jenkins pipeline image is first deployed to kubernetes, it then deploys covenant from a pre-configured image (hosted at dockerhub)
-* The pipeline then interacts with the covenant API to create a default user.
+* The code in this repo demonstrates an automated pipeline to deploy Eqonex Matching Engine Load Test Workbench to kubernetes and configure it using the eqonex-loadengine API.
+* A jenkins pipeline image is first deployed to kubernetes, it then deploys eqonex-loadengine from a pre-configured image (hosted at dockerhub)
+* The pipeline then interacts with the eqonex-loadengine API to create a default user.
 
 # How to deploy (MacOS):
 
@@ -32,26 +32,26 @@ jenkins-service   NodePort   10.43.49.147   <none>        8080:30888/TCP   2m15s
 
 ![alt text](content/jenkins-login.png?raw=true "Deployer Login") 
 
-* select the single pipeline configured ("covenant") and click "build"
+* select the single pipeline configured ("eqonex-loadengine") and click "build"
 
-![alt text](content/covenant-pipeline.png?raw=true "Deploy Pipeline")
+![alt text](content/eqonex-loadengine-pipeline.png?raw=true "Deploy Pipeline")
 
-* Get covenant login password from the Jenkins console output:
+* Get eqonex-loadengine login password from the Jenkins console output:
 
-![alt text](content/password.png?raw=true "Covenant Password")
+![alt text](content/password.png?raw=true "Eqonex Matching Engine Load Test Workbench Password")
 
-* Access the Covenant UI at `https://127.0.0.1:30743/covenantuser/login` using the credential provided in the pipeline console output (This should be ready in the "Configuring" Jenkins build stage):
+* Access the Eqonex Matching Engine Load Test Workbench UI at `https://127.0.0.1:30743/eqonex-loadengineuser/login` using the credential provided in the pipeline console output (This should be ready in the "Configuring" Jenkins build stage):
 
-![alt text](content/covenant.png?raw=true "Covenant UI")
+![alt text](content/eqonex-loadengine.png?raw=true "Eqonex Matching Engine Load Test Workbench UI")
 
 The user configured via the API should be visible in the `users` section:
 
-![alt text](content/covenant-users.png?raw=true "Covenant user")
+![alt text](content/eqonex-loadengine-users.png?raw=true "Eqonex Matching Engine Load Test Workbench user")
 
-# Extending the covenant deployer pipeline
+# Extending the eqonex-loadengine deployer pipeline
 
 * The deployer pipeline is defined as a declarative Jenkins pipeline DSL based on groovy and deployed as an immutable docker image.
-* To modify and update the pipeline in the docker image, modify `covenant.groovy` in `deployer-image` folder and rebuild the image:
+* To modify and update the pipeline in the docker image, modify `eqonex-loadengine.groovy` in `deployer-image` folder and rebuild the image:
 
 ```
 #Note: Use your  specific registry tag below ...
@@ -62,20 +62,15 @@ docker push archbungle/jenkins:jcasc-0.0.x
 
 (Modify to your personal image registry requirements)
 
-* NOTE: The current bootstrapped Covenant image is available at Dockerhub: `archbungle/kovenant:0.0.1` - this image is bootstrapped with a known admin password which can be updated during redeploy time.
 
 # Repositories:
 
 * Deployer: https://github.com/archmangler/jenkins-jcasc
-* Covenant kubernetes configs: https://github.com/archmangler/kovenant
  
 #  Issues
 
-* The covenant API is poorly documented, and swagger is broken: https://github.com/cobbr/Covenant/issues/352
+- n/a
 
 # ToDo (Pending)
 
-- Configure Listener
-- Configure Launcher
-- Deploy + Configure Grunt
-- Test connection between Grunt and Covenant
+- Docker Standalone for ECS (for lighter deploy footprint)

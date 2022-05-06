@@ -17,4 +17,4 @@ jenkins:
 
 #Job Definitions using job-dsl plugin
 jobs:
-  - file: /usr/local/covenant.groovy
+  - file: /usr/local/eqonex-loadengine.groovy
