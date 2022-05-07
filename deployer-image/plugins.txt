@@ -26,3 +26,4 @@ github-oauth
 workflow-api:latest
 workflow-durable-task-step:latest
 workflow-support:latest
+pipeline-input-step:latest
